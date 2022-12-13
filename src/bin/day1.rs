@@ -1,10 +1,8 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
+use advent::read_lines;
 
 fn main() {
     // File hosts must exist in current path before this produces output
-    if let Ok(lines) = read_lines("input.txt") {
+    if let Ok(lines) = read_lines("inputs/day1.txt") {
         // Consumes the iterator, returns an (Optional) String
         let mut elf_cals: Vec<i32> = Vec::new();
         let mut total_cals: Vec<i32> = Vec::new();
@@ -21,16 +19,7 @@ fn main() {
             }
         }
         total_cals.sort();
-        let sum: i32 = total_cals.chunks(3).collect().first().unwrap().iter().sum();
-        
-        println!("{:?}", sum);
+        let sum: Vec<&[i32]> = total_cals.chunks(3).collect();
+        println!("{}", sum.first().unwrap().iter().sum::<i32>());
     }
-}
-
-// The output is wrapped in a Result to allow matching on errors
-// Returns an Iterator to the Reader of the lines of the file.
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }

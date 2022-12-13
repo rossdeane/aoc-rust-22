@@ -2,7 +2,7 @@ use advent::read_lines;
 
 fn main() {
     // File hosts must exist in current path before this produces output
-    if let Ok(lines) = read_lines("input2.txt") {
+    if let Ok(lines) = read_lines("inputs/day2.txt") {
         let mut all_scores: Vec<i32> = Vec::new();
         // Consumes the iterator, returns an (Optional) String
         for line in lines {
